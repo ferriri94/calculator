@@ -1,11 +1,11 @@
 from tkinter import *
 from functools import partial
+import re
 
 
 class Calculator:
 
     def __init__(self, master):
-        print('__init__ running')
         # This is the string which will hold the main expression to be evaluated.
         self.expression = ''
         self.equation = StringVar()
@@ -80,11 +80,14 @@ class Calculator:
         self.divide = Button(self.button_grid, text="/", command=partial(self.__press, "/"))
         self.divide.grid(row=0, column=3)
 
-        self.prev_ans = Button(self.button_grid, text="Ans", command=partial(self.__press, self.ans))
+        self.prev_ans = Button(self.button_grid, text="Ans", command=partial(self.__press, "Ans"))
         self.prev_ans.grid(row=4, column=2)
 
         self.equals = Button(self.button_grid, text="=", command=self.__evaluate)
         self.equals.grid(row=4, column=3)
+
+        # Finally, associate the enter key with evaluating the expression.
+        master.bind('<Return>', self.__evaluate)
 
     def __clear_box(self, event):
         """
@@ -102,16 +105,24 @@ class Calculator:
         self.equation.set(self.expression)
 
     def __press(self, text_to_add):
-        self.expression += str(text_to_add)
+        if not re.search(r'[\w0-9]', self.expression) and type(text_to_add) != int:
+            if re.search(r'[^\w\s]', text_to_add):
+                self.expression = str(self.ans)
+        self.expression += str(self.ans) if text_to_add == "Ans" else str(text_to_add)
         self.equation.set(self.expression)
 
-    def __evaluate(self):
-        self.result = str(eval(self.expression))
-        self.ans = self.result
-        print(self.ans)
-        self.equation.set(self.result)
-        self.expression = ''
-
+    def __evaluate(self, _ = None):
+        try:
+            self.result = str(eval(self.expression))
+            self.ans = self.result
+            self.equation.set(self.result)
+            self.expression = ''
+        except ZeroDivisionError:
+            self.equation.set('Math Error: Cannot divide by zero')
+            self.expression = ''
+        except SyntaxError:
+            self.equation.set('Error: Please only use numeric values')
+            self.expression = ''
 
 
 def main():
