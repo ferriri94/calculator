@@ -33,8 +33,11 @@ class Calculator:
         print("I will be a calculator.")
 
 
-calc_root = Tk()
+def main():
+    calc_root = Tk()
+    _ = Calculator(calc_root)
+    calc_root.mainloop()
 
-calculator = Calculator(calc_root)
 
-calc_root.mainloop()
+if __name__ == '__main__':
+    main()
