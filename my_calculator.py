@@ -92,26 +92,42 @@ class Calculator:
     def __clear_box(self, event):
         """
         Function to clear the expression field Entry widget.
-        :param event:The event that will trigger this method - checks whether Clear button has been pressed
-                     (and hence clear everything not just default message).
-        :return:None
+        :param event: The event that will trigger this method - checks whether Clear button has been pressed (and hence
+                      clear everything not just default message).
+        :return: None
         """
         if self.expression_field.get() == 'Enter your expression.' or event == 'CLEAR':
             self.expression = ''
             self.equation.set(self.expression)
 
     def __trim_expression(self):
+        """
+        Function to trim final character from expression when Del button is pressed.
+        :return: None
+        """
         self.expression = self.expression[:-1]
         self.equation.set(self.expression)
 
     def __press(self, text_to_add):
+        """
+        Function to augment expression with input from latest button press. Use regex to check if first character of
+        expression is an operator, if it is then put previous answer at the start.
+        :param text_to_add: Input from button just pressed.
+        :return: None
+        """
         if not re.search(r'[\w0-9]', self.expression) and type(text_to_add) != int:
             if re.search(r'[^\w\s]', text_to_add):
                 self.expression = str(self.ans)
         self.expression += str(self.ans) if text_to_add == "Ans" else str(text_to_add)
         self.equation.set(self.expression)
 
-    def __evaluate(self, _ = None):
+    def __evaluate(self, _=None):
+        """
+        Function to evaluate the expression generated from the button presses. Checks for invalid operations and prints
+        an error message in the Entry box.
+        :param _: Ignored, only present so fn can be called by pressing enter key.
+        :return: None
+        """
         try:
             self.result = str(eval(self.expression))
             self.ans = self.result
@@ -126,7 +142,10 @@ class Calculator:
 
 
 def main():
-    # Initialise the tkinter context, customise to Calculator class, run GUI.
+    """
+    Initialise the tkinter context, customise to Calculator class, run GUI.
+    :return: None
+    """
     calc_root = Tk()
     Calculator(calc_root)
     calc_root.mainloop()
