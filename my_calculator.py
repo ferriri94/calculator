@@ -15,7 +15,7 @@ class Calculator:
         self.ans = 0
 
         # Create two frames - one for the text box and one for the buttons.
-        self.top_frame = Frame(master)
+        self.top_frame = Frame(master, height=2, width=20)
         self.top_frame.pack(side=TOP)
         self.button_grid = Frame(master)
         self.button_grid.pack(side=BOTTOM)
@@ -26,64 +26,64 @@ class Calculator:
         self.expression_field.bind('<Button-1>', self.__clear_box)
 
         # Set up all the buttons.
-        self.quit_button = Button(self.button_grid, text="Quit", command=master.quit)
+        self.quit_button = Button(self.button_grid, text="Quit", command=master.quit, height=2, width=5)
         self.quit_button.grid(row=0, column=0)
 
-        self.clear_button = Button(self.button_grid, text="Clear", command=partial(self.__clear_box, 'CLEAR'))
+        self.clear_button = Button(self.button_grid, text="Clear", command=partial(self.__clear_box, 'CLEAR'), height=2, width=5)
         self.clear_button.grid(row=0, column=1)
 
-        self.del_button = Button(self.button_grid, text="Del", command=self.__trim_expression)
+        self.del_button = Button(self.button_grid, text="Del", command=self.__trim_expression, height=2, width=5)
         self.del_button.grid(row=0, column=2)
 
-        self.button1 = Button(self.button_grid, text="1", command=partial(self.__press, 1))
+        self.button1 = Button(self.button_grid, text="1", command=partial(self.__press, 1), height=2, width=5)
         self.button1.grid(row=3, column=0)
 
-        self.button2 = Button(self.button_grid, text="2", command=partial(self.__press, 2))
+        self.button2 = Button(self.button_grid, text="2", command=partial(self.__press, 2), height=2, width=5)
         self.button2.grid(row=3, column=1)
 
-        self.button3 = Button(self.button_grid, text="3", command=partial(self.__press, 3))
+        self.button3 = Button(self.button_grid, text="3", command=partial(self.__press, 3), height=2, width=5)
         self.button3.grid(row=3, column=2)
 
-        self.button4 = Button(self.button_grid, text="4", command=partial(self.__press, 4))
+        self.button4 = Button(self.button_grid, text="4", command=partial(self.__press, 4), height=2, width=5)
         self.button4.grid(row=2, column=0)
 
-        self.button5 = Button(self.button_grid, text="5", command=partial(self.__press, 5))
+        self.button5 = Button(self.button_grid, text="5", command=partial(self.__press, 5), height=2, width=5)
         self.button5.grid(row=2, column=1)
 
-        self.button6 = Button(self.button_grid, text="6", command=partial(self.__press, 6))
+        self.button6 = Button(self.button_grid, text="6", command=partial(self.__press, 6), height=2, width=5)
         self.button6.grid(row=2, column=2)
 
-        self.button7 = Button(self.button_grid, text="7", command=partial(self.__press, 7))
+        self.button7 = Button(self.button_grid, text="7", command=partial(self.__press, 7), height=2, width=5)
         self.button7.grid(row=1, column=0)
 
-        self.button8 = Button(self.button_grid, text="8", command=partial(self.__press, 8))
+        self.button8 = Button(self.button_grid, text="8", command=partial(self.__press, 8), height=2, width=5)
         self.button8.grid(row=1, column=1)
 
-        self.button9 = Button(self.button_grid, text="9", command=partial(self.__press, 9))
+        self.button9 = Button(self.button_grid, text="9", command=partial(self.__press, 9), height=2, width=5)
         self.button9.grid(row=1, column=2)
 
-        self.button0 = Button(self.button_grid, text="0", command=partial(self.__press, 0))
+        self.button0 = Button(self.button_grid, text="0", command=partial(self.__press, 0), height=2, width=5)
         self.button0.grid(row=4, column=1)
 
-        self.dec_point = Button(self.button_grid, text=".", command=partial(self.__press, "."))
+        self.dec_point = Button(self.button_grid, text=".", command=partial(self.__press, "."), height=2, width=5)
         self.dec_point.grid(row=4, column=0)
 
-        self.plus = Button(self.button_grid, text="+", command=partial(self.__press, "+"))
+        self.plus = Button(self.button_grid, text="+", command=partial(self.__press, "+"), height=2, width=5)
         self.plus.grid(row=3, column=3)
 
-        self.minus = Button(self.button_grid, text="-", command=partial(self.__press, "-"))
+        self.minus = Button(self.button_grid, text="-", command=partial(self.__press, "-"), height=2, width=5)
         self.minus.grid(row=2, column=3)
 
-        self.times = Button(self.button_grid, text="*", command=partial(self.__press, "*"))
+        self.times = Button(self.button_grid, text="*", command=partial(self.__press, "*"), height=2, width=5)
         self.times.grid(row=1, column=3)
 
-        self.divide = Button(self.button_grid, text="/", command=partial(self.__press, "/"))
+        self.divide = Button(self.button_grid, text="/", command=partial(self.__press, "/"), height=2, width=5)
         self.divide.grid(row=0, column=3)
 
-        self.prev_ans = Button(self.button_grid, text="Ans", command=partial(self.__press, "Ans"))
+        self.prev_ans = Button(self.button_grid, text="Ans", command=partial(self.__press, "Ans"), height=2, width=5)
         self.prev_ans.grid(row=4, column=2)
 
-        self.equals = Button(self.button_grid, text="=", command=self.__evaluate)
+        self.equals = Button(self.button_grid, text="=", command=self.__evaluate, height=2, width=5)
         self.equals.grid(row=4, column=3)
 
         # Finally, associate the enter key with evaluating the expression.
